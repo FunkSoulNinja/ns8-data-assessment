@@ -69,7 +69,7 @@ async function fetchAndParseData() {
   const data = await getData()
   const parsedData = data.map(parseItem)
 
-  fs.writeFileSync('output.json', JSON.stringify(parsedData))
+  fs.writeFileSync('output.json', JSON.stringify(parsedData, null, 2))
 }
 
 fetchAndParseData()
