@@ -1,19 +1,13 @@
-import axios from 'axios'
 import fs from 'fs'
 
-import { UserObjectType, ParsedUserType } from './types'
-import parseItem from './parseUtils'
+import fetchAndParseData from './src/fetchAndParseData'
 
-async function getData() {
-  const res = await axios('https://data-endpoint.herokuapp.com/data')
-  return res.data as UserObjectType[]
+const API_ENDPOINT = 'https://data-endpoint.herokuapp.com/data'
+
+async function main() {
+  const parsedData = await fetchAndParseData(API_ENDPOINT)
+
+  fs.writeFileSync('./output.json', JSON.stringify(parsedData, null, 2), 'utf8')
 }
 
-async function fetchAndParseData() {
-  const data = await getData()
-  const parsedData: ParsedUserType[] = data.map(parseItem)
-
-  fs.writeFileSync('output.json', JSON.stringify(parsedData, null, 2), 'utf8')
-}
-
-fetchAndParseData()
+main()

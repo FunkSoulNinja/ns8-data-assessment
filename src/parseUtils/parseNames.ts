@@ -1,4 +1,4 @@
-import { UserObjectType } from '../types'
+import { UserObjectType } from '../../types'
 import { NA } from './constants'
 
 function parseNames({ firstName, lastName }: UserObjectType) {
